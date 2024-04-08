@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+  labels:
+  name: ms-nginx-traefik
+  namespace: ortelius
+spec:
+  clusterIP: 10.152.183.58
+  clusterIPs:
+  - 10.152.183.58
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    nodePort: 31679
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  - name: https
+    nodePort: 32086
+    port: 443
+    protocol: TCP
+    targetPort: 443
+  selector:
+    app: ms-nginx
+    tier: frontend
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

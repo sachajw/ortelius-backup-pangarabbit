@@ -4,3 +4,11 @@ global:
   nginxController:
     enabled: false
 
+ms-nginx:
+  ingress:
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web
+      traefik.ingress.kubernetes.io/router.middlewares: ortelius-redirectregex@kubernetescrd
+      kubernetes.io/ingress.class: traefik
+
+--set ms-nginx.ingress.type=k3d -set ms-nginx.ingress.dnsname=ortelius.example.com
