@@ -1,5 +1,0 @@
-global:
-  postgresql:
-    enabled: false
-  nginxController:
-    enabled: false
